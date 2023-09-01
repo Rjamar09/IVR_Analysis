@@ -11,7 +11,7 @@ from PIL import Image
 
 
 # Load your image
-image = Image.open('https://github.com/Rjamar09/IVR_Analysis/blob/main/logo.jpg')
+image = Image.open('logo.jpg')
 
 # Center-align the title and change the color using HTML-style formatting
 title_html = """
