@@ -127,14 +127,17 @@ if uploaded_file is not None:
         xaxis=dict(tickangle=-45),
         showlegend=False
     )
-
+    
+    # Set the spacing between bars and annotations
+    spacing = 50  # Adjust this value for desired spacing
+    
     # Add annotations to the bars
     annotations = []
     for x, y in zip(user_counts.index, user_counts.values):
         annotations.append(
             dict(
                 x=x,
-                y=y,
+                y=y + spacing,
                 text=str(y),
                 showarrow=False,
                 font=dict(color='orange')
