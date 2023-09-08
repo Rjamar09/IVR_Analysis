@@ -204,31 +204,37 @@ if uploaded_file is not None:
     # Display the plot using st.pyplot()
     st.pyplot(plt)
 
+    # List of unique days
+    ordered_days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']
     # Allow user to select specific days
     selected_days = st.multiselect('Select days to view data', ordered_days)
-
     # Display call data for selected days
     if selected_days:
-        selected_data = data[data['call_date'].dt.day_name().isin(selected_days)]
-        selected_data = selected_data[['call_date', 'user', 'phone_number', 'first_name', 'length_in_sec', 'status_name']]
-    
+        selected_data = data[data['call_date'].dt.day_name().isin(selected_days)]     
         # Get unique dates from the selected data
-        unique_dates = selected_data['call_date'].dt.date.unique()
-    
+        unique_dates = selected_data['call_date'].dt.date.unique()        
         # Allow user to select a specific date from the filtered data
-        selected_date = st.selectbox('Select a date from filtered data', unique_dates)
-    
+        selected_date = st.selectbox('Select a date from filtered data', unique_dates)        
         # Filter data for the selected date
-        selected_date_data = selected_data[selected_data['call_date'].dt.date == selected_date]
+        selected_date_data = selected_data[selected_data['call_date'].dt.date == selected_date]      
+        # Get unique companies for the selected date
+        unique_companies_for_date = selected_date_data['user'].unique()
+        # Allow user to select a company for the selected date
+        selected_company = st.selectbox('Select a company for the selected date', unique_companies_for_date)
 
-        # Add index number to the dataframes
-        selected_data = selected_data.reset_index(drop=True)
-        selected_date_data = selected_date_data.reset_index(drop=True)
-    
-        # Display the filtered data in a table
-        st.write('Call data for selected date:')
-        st.dataframe(selected_date_data, width=800)  # Increase the width of the dataframe
+        # Display call data for selected date and company
+        if selected_company:
+            selected_company_data = selected_date_data[selected_date_data['user'] == selected_company]
+            selected_company_data = selected_company_data[['call_date', 'user', 'phone_number', 'first_name', 'length_in_sec', 'status_name']]
 
+            # Add index number to the dataframes
+            selected_date_data = selected_date_data.reset_index(drop=True)
+            selected_company_data = selected_company_data.reset_index(drop=True)
+
+            # Display the filtered data in a table
+            st.write('Call data for selected date and company:')
+            st.dataframe(selected_company_data, width=800)
+            
      # Streamlit app code
     st.subheader('Status Analysis')
 
