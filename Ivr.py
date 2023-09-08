@@ -396,5 +396,5 @@ if uploaded_file is not None:
 
 
 # Footer
-# st.write("---")
-# st.write("Created By Amar.")
+# st.write("---") #
+# st.write("Created By Amar.") #
