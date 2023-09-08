@@ -392,4 +392,9 @@ if uploaded_file is not None:
 
     # Show the Plotly figure in Streamlit
     st.plotly_chart(fig)
-    st.dataframe(hourly_status_count)
+    st.dataframe(hourly_status_count) 
+
+
+# Footer
+st.write("---")
+st.write("Created By Amar.")
