@@ -137,7 +137,7 @@ if uploaded_file is not None:
                 y=y,
                 text=str(y),
                 showarrow=False,
-                font=dict(color='black')
+                font=dict(color='orange')
             )
         )
     fig.update_layout(annotations=annotations)
