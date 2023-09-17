@@ -28,14 +28,22 @@ st.markdown(title_html, unsafe_allow_html=True)
 # Display the image
 st.image(image, use_column_width=True)
 
-# Sidebar
-uploaded_file = st.sidebar.file_uploader("Upload your IVR data (CSV or Excel format)", type=["csv", "xlsx", "xls"])
+# Function to clean phone numbers in a DataFrame
+def clean_phone_numbers(df, column_name):
+    df[column_name] = df[column_name].astype(str)  # Convert the column to string
+    df[column_name] = df[column_name].str.replace(',', '')  # Remove commas from phone numbers
+
+# Main Streamlit code
+st.title("IVR Data Analysis")
+
+# Upload file
+uploaded_file = st.sidebar.file_uploader("Upload a CSV or Excel file", type=["csv", "xlsx"])
 
 if uploaded_file is not None:
     file_extension = uploaded_file.name.split(".")[-1]
 
     if file_extension == 'csv':
-        df = pd.read_csv(uploaded_file)
+        df = pd.read_csv(uploaded_file, delimiter=';')  # Specify the delimiter if needed
     else:
         df = pd.read_excel(uploaded_file)
 
@@ -44,6 +52,11 @@ if uploaded_file is not None:
     st.sidebar.write(f"Uploaded File: {uploaded_file.name}")
     st.sidebar.write(f"Number of Rows: {df.shape[0]}")
     st.sidebar.write(f"Number of Columns: {df.shape[1]}")
+
+    # Data cleaning (if phone numbers contain commas)
+    phone_column_name = 'phone_number'  # Replace with the actual column name
+    if phone_column_name in df.columns:
+        clean_phone_numbers(df, phone_column_name)
 
     # Data analysis section
     st.subheader("IVR Data Overview")
