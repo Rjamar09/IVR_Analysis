@@ -411,7 +411,6 @@ if uploaded_file is not None:
     st.dataframe(hourly_status_count) 
 
 
-# Footer
- st.write("---") 
- st.write("Created By Amar Singh.") 
- st.write("Data Analyst")
+st.write("---") 
+st.write("Created By Amar Singh.") 
+st.write("Data Analyst")
