@@ -11,13 +11,13 @@ from PIL import Image
 
 
 # Load your image
-image = Image.open('logo.jpg')
+image = Image.open('D:\AOSPL\Automation\ivr_project\logo.jpg')
 
 # Center-align the title and change the color using HTML-style formatting
 title_html = """
     <style>
         .title {
-            color: skyblue; /* Change this to the color you want */
+            color: skyblue; 
             text-align: center;
         }
     </style>
@@ -411,6 +411,7 @@ if uploaded_file is not None:
     st.dataframe(hourly_status_count) 
 
 
-st.write("---") 
-st.write("Created By Amar Singh.") 
+# Footer
+st.write("---")
+st.write("Created By Amar Singh.")
 st.write("Data Analyst")
